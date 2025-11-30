@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>طلب اشتراك أونلاين</h3>
+
+<form id="f">
+اسم المودع:<br>
+<input name="name" required><br><br>
+
+رقم الجوال:<br>
+<input name="phone" required><br><br>
+
+رقم الحوالة:<br>
+<input name="ref" required><br><br>
+
+<button>إرسال</button>
+</form>
+
+<script>
+document.getElementById("f").onsubmit = function(e){
+    e.preventDefault();
+    let f = new FormData(this);
+
+    fetch("http://localhost:3000/pay", {  // للسيرفر المحلي
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            name : f.get("name"),
+            phone: f.get("phone"),
+            ref  : f.get("ref")
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.ok){
+            alert("✅ تم إرسال الطلب بنجاح");
+            this.reset();
+        } else {
+            alert("❌ حدث خطأ أثناء الإرسال");
+        }
+    })
+    .catch(err => {
+        alert("❌ خطأ في الاتصال بالسيرفر");
+        console.error(err);
+    });
+}
+</script>
+</body>
+</html>
