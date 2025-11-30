@@ -21,7 +21,7 @@ document.getElementById("f").onsubmit = function(e){
     e.preventDefault();
     let f = new FormData(this);
 
-    fetch("https://telegram-hotspot.onrender.com", {  // للسيرفر المحلي
+    fetch("https://telegram-hotspot.onrender.com/pay", {  // للسيرفر المحلي
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
@@ -48,3 +48,4 @@ document.getElementById("f").onsubmit = function(e){
 </body>
 
 </html>
+
