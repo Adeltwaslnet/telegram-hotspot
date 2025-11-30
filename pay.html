@@ -1,51 +1,117 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h3>طلب اشتراك أونلاين</h3>
-
-<form id="f">
-اسم المودع:<br>
-<input name="name" required><br><br>
-
-رقم الجوال:<br>
-<input name="phone" required><br><br>
-
-رقم الحوالة:<br>
-<input name="ref" required><br><br>
-
-<button>إرسال</button>
-</form>
-
-<script>
-document.getElementById("f").onsubmit = function(e){
-    e.preventDefault();
-    let f = new FormData(this);
-
-    fetch("https://telegram-hotspot.onrender.com/pay", {  // للسيرفر المحلي
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-            name : f.get("name"),
-            phone: f.get("phone"),
-            ref  : f.get("ref")
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.ok){
-            alert("✅ تم إرسال الطلب بنجاح");
-            this.reset();
-        } else {
-            alert("❌ حدث خطأ أثناء الإرسال");
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلب اشتراك أونلاين</title>
+    
+    <style>
+        /* 🎨 التنسيقات الأساسية */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px; /* مسافة داخلية من حواف الشاشة */
+            background-color: #f4f4f4; /* خلفية خفيفة */
+            text-align: right; /* محاذاة النص لليمين للغة العربية */
         }
-    })
-    .catch(err => {
-        alert("❌ خطأ في الاتصال بالسيرفر");
-        console.error(err);
-    });
-}
-</script>
+        
+        h3 {
+            color: #333;
+            text-align: center; /* عنوان متوسط */
+            margin-bottom: 30px;
+        }
+
+        /* 📝 تنسيق نموذج الإدخال (Form) */
+        #f {
+            max-width: 400px; /* تحديد أقصى عرض للنموذج ليكون جيداً على الأجهزة الأكبر */
+            margin: 0 auto; /* توسيط النموذج في المنتصف */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px; /* حواف دائرية */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+        }
+
+        /* ✏️ تنسيق حقول الإدخال */
+        input[type="text"], input:not([type]), button {
+            width: 100%; /* جعل حقل الإدخال والزر يأخذان كامل عرض الحاوية */
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box; /* التأكد من أن التبطين والحواف لا تزيد عن العرض الكلي */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        /* ➡️ تنسيق الزر */
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s; /* تأثير عند مرور الماوس */
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        /* 🏷️ تنسيق النصوص قبل حقل الإدخال (العناوين/Labels) */
+        #f > br {
+            display: none; /* إخفاء وسوم <br> لجعل التباعد أكثر تحكماً عبر CSS */
+        }
+
+        #f > label {
+            display: block; /* لضمان أن كل عنوان يأخذ سطره الخاص */
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h3>طلب اشتراك أونلاين</h3>
+
+    <form id="f">
+        <label for="name">اسم المودع:</label>
+        <input name="name" id="name" type="text" required><br>
+
+        <label for="phone">رقم الجوال:</label>
+        <input name="phone" id="phone" type="text" required><br>
+
+        <label for="ref">رقم الحوالة:</label>
+        <input name="ref" id="ref" type="text" required><br>
+
+        <button type="submit">إرسال</button>
+    </form>
+
+    <script>
+        document.getElementById("f").onsubmit = function(e){
+            e.preventDefault();
+            let f = new FormData(this);
+
+            fetch("https://telegram-hotspot.onrender.com/pay", {  // للسيرفر المحلي
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({
+                    name : f.get("name"),
+                    phone: f.get("phone"),
+                    ref  : f.get("ref")
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.ok){
+                    alert("✅ تم إرسال الطلب بنجاح");
+                    this.reset();
+                } else {
+                    alert("❌ حدث خطأ أثناء الإرسال");
+                }
+            })
+            .catch(err => {
+                alert("❌ خطأ في الاتصال بالسيرفر");
+                console.error(err);
+            });
+        }
+    </script>
 </body>
-
 </html>
-
