@@ -5,66 +5,65 @@
     <title>طلب اشتراك أونلاين</title>
     
     <style>
-        /* 🎨 التنسيقات الأساسية */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px; /* مسافة داخلية من حواف الشاشة */
-            background-color: #f4f4f4; /* خلفية خفيفة */
-            text-align: right; /* محاذاة النص لليمين للغة العربية */
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: right;
+            direction: rtl; /* ضمان اتجاه النص من اليمين لليسار */
         }
         
         h3 {
             color: #333;
-            text-align: center; /* عنوان متوسط */
+            text-align: center;
             margin-bottom: 30px;
         }
 
-        /* 📝 تنسيق نموذج الإدخال (Form) */
         #f {
-            max-width: 400px; /* تحديد أقصى عرض للنموذج ليكون جيداً على الأجهزة الأكبر */
-            margin: 0 auto; /* توسيط النموذج في المنتصف */
+            max-width: 400px; /* تحديد أقصى عرض للنموذج */
+            margin: 0 auto; /* توسيط النموذج */
             padding: 20px;
             background-color: #fff;
-            border-radius: 8px; /* حواف دائرية */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 🏷️ تنسيق العناوين (Labels) */
+        label {
+            display: block; 
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
         }
 
         /* ✏️ تنسيق حقول الإدخال */
-        input[type="text"], input:not([type]), button {
-            width: 100%; /* جعل حقل الإدخال والزر يأخذان كامل عرض الحاوية */
+        input[type="text"] {
+            width: 100%; /* جعل حقل الإدخال يأخذ كامل عرض الحاوية */
             padding: 10px;
             margin-top: 5px;
             margin-bottom: 20px;
-            box-sizing: border-box; /* التأكد من أن التبطين والحواف لا تزيد عن العرض الكلي */
+            box-sizing: border-box; 
             border: 1px solid #ccc;
             border-radius: 4px;
+            text-align: right;
         }
         
         /* ➡️ تنسيق الزر */
         button {
-            background-color: #5cb85c;
+            width: 100%;
+            background-color: #007bff; /* لون أزرق جذاب */
             color: white;
             padding: 12px 20px;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s; /* تأثير عند مرور الماوس */
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #4cae4c;
-        }
-
-        /* 🏷️ تنسيق النصوص قبل حقل الإدخال (العناوين/Labels) */
-        #f > br {
-            display: none; /* إخفاء وسوم <br> لجعل التباعد أكثر تحكماً عبر CSS */
-        }
-
-        #f > label {
-            display: block; /* لضمان أن كل عنوان يأخذ سطره الخاص */
-            margin-bottom: 5px;
-            font-weight: bold;
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -89,7 +88,7 @@
             e.preventDefault();
             let f = new FormData(this);
 
-            fetch("https://telegram-hotspot.onrender.com/pay", {  // للسيرفر المحلي
+            fetch("https://telegram-hotspot.onrender.com/pay", {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({
@@ -104,12 +103,14 @@
                     alert("✅ تم إرسال الطلب بنجاح");
                     this.reset();
                 } else {
-                    alert("❌ حدث خطأ أثناء الإرسال");
+                    alert("❌ حدث خطأ أثناء الإرسال. يرجى مراجعة البيانات.");
                 }
             })
             .catch(err => {
-                alert("❌ خطأ في الاتصال بالسيرفر");
-                console.error(err);
+                // 🛑 3. التعديل المطلوب: عرض رسالة عامة لمنع ظهور adeltwaslnet.github.io
+                alert("❌ خطأ في الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت.");
+                // يتم تسجيل الخطأ الفني في الكونسول للمطور فقط
+                console.error("خطأ في الاتصال بالسيرفر:", err);
             });
         }
     </script>
