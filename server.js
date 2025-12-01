@@ -22,9 +22,9 @@ app.post("/pay", async (req, res) => {
     const { name, phone, ref } = req.body;
 
     const text = `💳 طلب اشتراك جديد
-👤 الاسم: ${name}
-📞 الهاتف: ${phone}
-🔢 رقم الحوالة: ${ref}`;
+👤 رقم العرض:${name}
+📞 رقم الواتس: ${phone}
+🔢 رقم المرجع / الحوالة: ${ref}`;
 
     try {
         await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
