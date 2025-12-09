@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- استدعاء خط Cairo -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -72,10 +71,6 @@
         color:#333;
     }
 
-    .instructions b{
-        color:#0051b2;
-    }
-
     .offer-btn{
         background:#ffffff;
         color:#333;
@@ -96,11 +91,6 @@
         font-weight:600;
     }
 
-    .offer-btn:hover{
-        background:#f0f5ff;
-        transform:scale(1.02);
-    }
-
     .offer-btn.active{
         background:#dbe8ff;
         color:#0051b2;
@@ -111,7 +101,7 @@
     .arrow.rotate{ transform:rotate(90deg); }
 
     .offer-content{
-        display: none;       /* مخفي بالكامل عند التحميل */
+        display: none;
         max-height: 0;
         overflow: hidden;
         background:white;
@@ -129,17 +119,6 @@
         display: block;
         padding:14px;
         max-height:300px;
-    }
-
-    .offer-text{ font-size:17px; line-height:1.9; color:#444; }
-
-    label{
-        font-size:17px;
-        font-weight:600;
-        margin-bottom:5px;
-        display:block;
-        color:#333;
-        font-family: 'Cairo', sans-serif;
     }
 
     input{
@@ -168,20 +147,24 @@
         font-weight:600;
     }
 
-    button[type="submit"]:hover{
-        background:#1f8337;
-        transform:scale(1.03);
-    }
-
-    @media (max-width:600px){
-        .main-title{ font-size:26px; }
-        h3{ font-size:20px; }
-        .announcement{ font-size:16px; padding:12px 15px; }
-        .instructions{ font-size:15px; padding:12px; }
-        .offer-btn{ font-size:15px; padding:10px; }
-        .offer-content{ font-size:14px; padding:10px; }
-        input{ font-size:15px; padding:10px; }
-        button[type="submit"]{ font-size:16px; padding:12px; }
+    /* 🔥 طبقة الإغلاق */
+    #blocker {
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:#000c;
+        color:white;
+        font-size:30px;
+        font-family:'Cairo', sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        z-index:99999;
+        display:none;
+        text-align:center;
+        padding:20px;
     }
 </style>
 </head>
@@ -191,7 +174,7 @@
 <div class="main-title">عروض شبكة تواصل</div>
 
 <div class="announcement">
-    طلب اشتراك أونلاين — احصل على كروت مباشرة أونلاين بدون الرجوع للإدارة — سرعة، سهولة، خدمة 24 ساعة
+    طلب اشتراك أونلاين — خدمة 24 ساعة
 </div>
 
 <h3>طلب اشتراك أونلاين</h3>
@@ -199,10 +182,10 @@
 <div class="instructions">
     <b>طريقة الحصول على العرض:</b><br><br>
     1- قم بإيداع مبلغ العرض في حساب الكريمي: <b>3011773906</b><br>
-    2- اختر العرض ثم أضف <b>رقم العرض</b> في المربع المخصص.<br>
-    3- أضف رقم الواتس لاستلام الكروت.<br>
-    4- أضف رقم المرجع / الحوالة من الإيصال.<br>
-    5- اضغط إرسال وانتظر ربع ساعة فقط لاستلام الكروت.
+    2- اختر العرض ثم أضف <b>رقم العرض</b>.<br>
+    3- أضف رقم الواتس.<br>
+    4- أضف رقم المرجع / الحوالة.<br>
+    5- اضغط إرسال وانتظر ربع ساعة لاستلام الكروت.
 </div>
 
 <div id="offersArea">
@@ -211,7 +194,7 @@
         <span id="arrow1" class="arrow">▶</span>
     </button>
     <div id="offer1" class="offer-content">
-        <div class="offer-text">اودع مبلغ <b>2000 ريال</b> واحصل على:<br>✔ 12 كرت فئة 200</div>
+        <div>اودع مبلغ <b>2000 ريال</b> واحصل على 12 كرت فئة 200</div>
     </div>
 
     <button class="offer-btn" onclick="toggleOffer(event, 2)">
@@ -219,7 +202,7 @@
         <span id="arrow2" class="arrow">▶</span>
     </button>
     <div id="offer2" class="offer-content">
-        <div class="offer-text">اودع مبلغ <b>3000 ريال</b> واحصل على:<br>✔ 11 كرت فئة 300<br>✔ كرت إضافي فئة 200</div>
+        <div>اودع 3000 ريال — 11 كرت 300 + كرت 200</div>
     </div>
 
     <button class="offer-btn" onclick="toggleOffer(event, 3)">
@@ -227,31 +210,34 @@
         <span id="arrow3" class="arrow">▶</span>
     </button>
     <div id="offer3" class="offer-content">
-        <div class="offer-text">اودع مبلغ <b>7000 ريال</b> واحصل على:<br>✔ خط 15 جيجا صالح لمدة شهر</div>
+        <div>اودع 7000 ريال — خط 15 جيجا لمدة شهر</div>
     </div>
 </div>
 
 <form id="f">
 <label>رقم العرض:</label>
-<input name="name" placeholder="اكتب رقم العرض المختار" required 
-       type="tel" pattern="[0-9]{1,20}" inputmode="numeric" title="أدخل أرقام فقط">
+<input name="name" required type="tel">
 
 <label>رقم الواتس:</label>
-<input name="phone" placeholder="مثال: 777777777" required 
-       type="tel" pattern="[0-9]{5,15}" inputmode="numeric" title="أدخل أرقام فقط">
+<input name="phone" required type="tel">
 
 <label>رقم المرجع / الحوالة:</label>
-<input name="ref" placeholder="رقم الحوالة من إيصال الإيداع" required 
-       type="tel" pattern="[0-9]{3,20}" inputmode="numeric" title="أدخل أرقام فقط">
+<input name="ref" required type="tel">
 
 <button type="submit">إرسال</button>
 </form>
 
+<!-- 🔥 طبقة الإغلاق -->
+<div id="blocker">هذه الخدمة غير متوفرة حالياً</div>
+
 <script>
+// ----------------------
+// فتح/إغلاق العروض
+// ----------------------
 let offers = {
-    1 : "اودع مبلغ 2000 ريال واحصل على 12 كرت فئة 200",
-    2 : "اودع مبلغ 3000 ريال واحصل على 11 كرت فئة 300 + كرت إضافي فئة 200",
-    3 : "اودع مبلغ 7000 ريال واحصل على خط 15 جيجا صالح لمدة شهر"
+    1: "اودع 2000 ريال — 12 كرت فئة 200",
+    2: "اودع 3000 ريال — 11 كرت 300 + كرت 200",
+    3: "اودع 7000 ريال — خط 15 جيجا لشهر"
 };
 
 let selectedOffer = "";
@@ -260,14 +246,8 @@ function toggleOffer(event, num){
     document.querySelectorAll(".offer-content").forEach((c, i) => {
         if(i + 1 !== num){
             c.classList.remove("show");
-            c.style.display = "none"; 
+            c.style.display = "none";
         }
-    });
-    document.querySelectorAll(".offer-btn").forEach((b, i) => {
-        if(i + 1 !== num){ b.classList.remove("active"); }
-    });
-    document.querySelectorAll(".arrow").forEach((a, i) => {
-        if(i + 1 !== num){ a.classList.remove("rotate"); }
     });
 
     let box = document.getElementById("offer" + num);
@@ -275,52 +255,65 @@ function toggleOffer(event, num){
     let arrow = document.getElementById("arrow" + num);
 
     if(!box.classList.contains("show")){
-        box.style.display = "block";  
+        box.style.display = "block";
         box.classList.add("show");
         btn.classList.add("active");
         arrow.classList.add("rotate");
         selectedOffer = offers[num];
     } else {
         box.classList.remove("show");
-        box.style.display = "none"; 
+        box.style.display = "none";
         btn.classList.remove("active");
         arrow.classList.remove("rotate");
         selectedOffer = "";
     }
 }
 
+// ----------------------
+// إرسال الطلب
+// ----------------------
 document.getElementById("f").onsubmit = function(e){
     e.preventDefault();
     let f = new FormData(this);
 
-    fetch("https://telegram-hotspot.onrender.com/pay", {
+    fetch("/pay", {
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-            name : f.get("name"),
+            name: f.get("name"),
             phone: f.get("phone"),
-            ref  : f.get("ref"),
+            ref: f.get("ref"),
             offer: selectedOffer
         })
     })
     .then(r => r.json())
     .then(data => {
         if(data.ok){
-            alert("✅ تم إرسال الطلب بنجاح\nسيتم إرسال الكروت خلال ربع ساعة.");
+            alert("تم إرسال الطلب بنجاح");
             this.reset();
-            selectedOffer = "";
-            document.querySelectorAll(".offer-content").forEach(b => {b.classList.remove("show"); b.style.display="none";});
-            document.querySelectorAll(".offer-btn").forEach(b => b.classList.remove("active"));
-            document.querySelectorAll(".arrow").forEach(a => a.classList.remove("rotate"));
         } else {
-            alert("❌ حدث خطأ أثناء الإرسال");
+            alert("خطأ في الإرسال");
         }
-    })
-    .catch(err =>{
-        alert("❌ خطأ في الاتصال بالسيرفر");
-        console.log(err);
+    });
+};
+
+// ----------------------
+// 🔥 نظام الإغلاق
+// ----------------------
+function checkStatus(){
+    fetch("/status")
+    .then(r => r.json())
+    .then(data => {
+        if(data.status === "closed"){
+            document.getElementById("blocker").style.display = "flex";
+        } else {
+            document.getElementById("blocker").style.display = "none";
+        }
     });
 }
+
+checkStatus();
+setInterval(checkStatus, 3000);
 </script>
 
 </body>
