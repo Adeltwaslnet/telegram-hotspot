@@ -11,8 +11,8 @@ app.use(express.static("twasl")); // مجلد الصفحات
 let status = "open";
 
 // بوت التلغرام
-const TOKEN = "YOUR_TOKEN";
-const CHAT  = "YOUR_CHAT_ID";
+const TOKEN = "7940357644:AAFH10KCI6_NvXMyXle9-993l5cHo4HVhNk";
+const CHAT  = "6019392123";
 
 // مسار إرسال بيانات الطلب
 app.post("/pay", async (req, res) => {
@@ -58,3 +58,4 @@ app.post("/set", (req, res) => {
 
 // تشغيل السيرفر
 app.listen(3000, () => console.log("Server running on port 3000"));
+
