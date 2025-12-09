@@ -8,174 +8,180 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
+body {
     font-family: 'Cairo', sans-serif;
-    margin:0;
-    padding:18px;
+    margin: 0;
+    padding: 18px;
     background: linear-gradient(135deg,#eef2f3 0%,#dfe9f3 100%);
-    min-height:100vh;
-    box-sizing:border-box;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
-.main-title{
-    text-align:center;
-    font-size:32px;
-    font-weight:700;
-    color:#0051b2;
-    margin-bottom:15px;
-    letter-spacing:1px;
+.main-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #0051b2;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
 }
 
-.announcement{
-    width:100%;
+.announcement {
+    width: 100%;
     background: linear-gradient(90deg,#28a745,#5cb85c);
-    padding:15px 20px;
-    border-radius:12px;
-    box-shadow:0 0 20px rgba(40,168,69,0.5);
-    color:white;
-    font-size:18px;
-    font-weight:600;
-    text-align:center;
-    margin-bottom:25px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(40,168,69,0.5);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 25px;
     position: relative;
 }
 
-.announcement::before{
-    content:"📢";
-    position:absolute;
-    left:15px;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:22px;
+.announcement::before {
+    content: "📢";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
 }
 
-h3{
-    text-align:center;
-    margin-bottom:25px;
-    color:#222;
-    font-size:24px;
-    font-weight:700;
+h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #222;
+    font-size: 24px;
+    font-weight: 700;
 }
 
-.instructions{
-    background:white;
-    padding:18px;
-    border-radius:12px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.1);
-    margin-bottom:25px;
-    border-right:5px solid #007bff;
-    line-height:1.9;
-    font-size:17px;
-    color:#333;
+.instructions {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+    border-right: 5px solid #007bff;
+    line-height: 1.9;
+    font-size: 17px;
+    color: #333;
 }
 
-.instructions b{ color:#0051b2; }
-
-.offer-btn{
-    background:#fff;
-    color:#333;
-    border:none;
-    padding:16px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:18px;
-    width:100%;
-    text-align:right;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
-    transition:0.25s;
-    margin-bottom:10px;
-    font-weight:600;
+.instructions b {
+    color: #0051b2;
 }
 
-.offer-btn:hover{ background:#f0f5ff; transform:scale(1.02); }
-.offer-btn.active{ background:#dbe8ff; color:#0051b2; font-weight:bold; }
+.offer-btn {
+    background: #fff;
+    color: #333;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: 0.25s;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
 
-.arrow{ transition:0.3s; font-size:16px; }
-.arrow.rotate{ transform:rotate(90deg); }
+.offer-btn:hover { background: #f0f5ff; transform: scale(1.02); }
+.offer-btn.active { background: #dbe8ff; color: #0051b2; font-weight: bold; }
 
-.offer-content{
-    display:none;
-    max-height:0;
-    overflow:hidden;
-    background:white;
-    border-radius:10px;
-    border:1px solid #ddd;
-    margin-top:4px;
-    margin-bottom:12px;
-    padding:0 15px;
+.arrow { transition:0.3s; font-size:16px; }
+.arrow.rotate { transform: rotate(90deg); }
+
+.offer-content {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    padding: 0 15px;
     transition: max-height 0.35s ease, padding 0.25s ease;
-    box-shadow:0 3px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
 }
 
-.offer-content.show{
-    display:block;
-    padding:14px;
-    max-height:300px;
+.offer-content.show {
+    display: block;
+    padding: 14px;
+    max-height: 300px;
 }
 
-.offer-text{ font-size:17px; line-height:1.9; color:#444; }
-
-label{
-    font-size:17px;
-    font-weight:600;
-    margin-bottom:5px;
-    display:block;
+.offer-text {
+    font-size: 17px;
+    line-height: 1.9;
+    color: #444;
 }
 
-input{
-    width:100%;
-    padding:13px;
-    font-size:17px;
-    margin-bottom:18px;
-    border-radius:10px;
-    border:1px solid #bbb;
-    background:white;
-    box-shadow:0px 2px 5px rgba(0,0,0,0.05);
+label {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
 }
 
-button[type="submit"]{
-    width:100%;
-    background:#28a745;
-    padding:16px;
-    font-size:19px;
-    color:white;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    box-shadow:0 3px 8px rgba(0,0,0,0.15);
-    transition:0.2s;
-    font-weight:600;
+input {
+    width: 100%;
+    padding: 13px;
+    font-size: 17px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+    background: white;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
 }
 
-button[type="submit"]:hover{ background:#1f8337; transform:scale(1.03); }
-
-#blocker{
-    position:fixed;
-    top:0; left:0; width:100%; height:100%;
-    background:#000c;
-    color:white;
-    font-size:30px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-    display:none;
-    text-align:center;
-    padding:20px;
+button[type="submit"] {
+    width: 100%;
+    background: #28a745;
+    padding: 16px;
+    font-size: 19px;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: 0.2s;
+    font-weight: 600;
 }
 
-@media (max-width:600px){
-    .main-title{ font-size:26px; }
-    h3{ font-size:20px; }
-    .announcement{ font-size:16px; padding:12px 15px; }
-    .instructions{ font-size:15px; padding:12px; }
-    .offer-btn{ font-size:15px; padding:10px; }
-    .offer-content{ font-size:14px; padding:10px; }
-    input{ font-size:15px; padding:10px; }
-    button[type="submit"]{ font-size:16px; padding:12px; }
+button[type="submit"]:hover { background: #1f8337; transform: scale(1.03); }
+
+#blocker {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000c;
+    color: white;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width:600px) {
+    .main-title { font-size: 26px; }
+    h3 { font-size: 20px; }
+    .announcement { font-size: 16px; padding: 12px 15px; }
+    .instructions { font-size: 15px; padding: 12px; }
+    .offer-btn { font-size: 15px; padding: 10px; }
+    .offer-content { font-size: 14px; padding: 10px; }
+    input { font-size: 15px; padding: 10px; }
+    button[type="submit"] { font-size: 16px; padding: 12px; }
 }
 </style>
 </head>
@@ -183,7 +189,7 @@ button[type="submit"]:hover{ background:#1f8337; transform:scale(1.03); }
 <body>
 
 <div class="main-title">عروض شبكة تواصل</div>
-<div class="announcement">طلب اشتراك أونلاين — خدمة 24 ساعة</div>
+<div class="announcement">طلب اشتراك أونلاين — احصل على كروت مباشرة أونلاين بدون الرجوع للإدارة — سرعة، سهولة، خدمة 24 ساعة</div>
 
 <h3>طلب اشتراك أونلاين</h3>
 <div class="instructions">
@@ -209,13 +215,10 @@ button[type="submit"]:hover{ background:#1f8337; transform:scale(1.03); }
 <form id="f">
 <label>رقم العرض:</label>
 <input name="name" placeholder="اكتب رقم العرض المختار" required type="tel">
-
 <label>رقم الواتس:</label>
 <input name="phone" placeholder="مثال: 777777777" required type="tel">
-
 <label>رقم المرجع / الحوالة:</label>
 <input name="ref" placeholder="رقم الحوالة من إيصال الإيداع" required type="tel">
-
 <button type="submit">إرسال</button>
 </form>
 
@@ -223,41 +226,41 @@ button[type="submit"]:hover{ background:#1f8337; transform:scale(1.03); }
 
 <script>
 let offers = {
-    1: "اودع مبلغ 2000 ريال واحصل على 12 كرت فئة 200",
-    2: "اودع مبلغ 3000 ريال واحصل على 11 كرت 300 + كرت إضافي 200",
-    3: "اودع مبلغ 7000 ريال واحصل على خط 15 جيجا لشهر"
+    1:"اودع مبلغ 2000 ريال واحصل على 12 كرت فئة 200",
+    2:"اودع مبلغ 3000 ريال واحصل على 11 كرت 300 + كرت إضافي 200",
+    3:"اودع مبلغ 7000 ريال واحصل على خط 15 جيجا لشهر"
 };
 
 let selectedOffer = "";
 
-function toggleOffer(event, num){
+function toggleOffer(event,num){
     document.querySelectorAll(".offer-content").forEach((c,i)=>{if(i+1!==num){c.classList.remove("show");c.style.display="none";}});
     document.querySelectorAll(".offer-btn").forEach((b,i)=>{if(i+1!==num)b.classList.remove("active");});
     document.querySelectorAll(".arrow").forEach((a,i)=>{if(i+1!==num)a.classList.remove("rotate");});
 
-    let box = document.getElementById("offer"+num);
-    let btn = event.currentTarget;
-    let arrow = document.getElementById("arrow"+num);
+    let box=document.getElementById("offer"+num);
+    let btn=event.currentTarget;
+    let arrow=document.getElementById("arrow"+num);
 
     if(!box.classList.contains("show")){
         box.style.display="block";
         box.classList.add("show");
         btn.classList.add("active");
         arrow.classList.add("rotate");
-        selectedOffer = offers[num];
+        selectedOffer=offers[num];
     }else{
         box.classList.remove("show");
         box.style.display="none";
         btn.classList.remove("active");
         arrow.classList.remove("rotate");
-        selectedOffer = "";
+        selectedOffer="";
     }
 }
 
-document.getElementById("f").onsubmit = function(e){
+document.getElementById("f").onsubmit=function(e){
     e.preventDefault();
-    let f = new FormData(this);
-    fetch("https://telegram-hotspot.onrender.com/pay", {
+    let f=new FormData(this);
+    fetch("https://telegram-hotspot.onrender.com/pay",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
@@ -266,32 +269,25 @@ document.getElementById("f").onsubmit = function(e){
             ref:f.get("ref"),
             offer:selectedOffer
         })
-    })
-    .then(r=>r.json())
-    .then(data=>{
+    }).then(r=>r.json()).then(data=>{
         if(data.ok){
-            alert("✅ تم إرسال الطلب بنجاح");
-            this.reset();
-            selectedOffer="";
+            alert("✅ تم إرسال الطلب بنجاح\nسيتم إرسال الكروت خلال ربع ساعة.");
+            this.reset(); selectedOffer="";
             document.querySelectorAll(".offer-content").forEach(b=>{b.classList.remove("show");b.style.display="none";});
             document.querySelectorAll(".offer-btn").forEach(b=>b.classList.remove("active"));
             document.querySelectorAll(".arrow").forEach(a=>a.classList.remove("rotate"));
-        }else{alert("❌ حدث خطأ أثناء الإرسال");}
-    })
-    .catch(err=>{alert("❌ خطأ في الاتصال بالسيرفر"); console.log(err);});
+        }else{ alert("❌ حدث خطأ أثناء الإرسال"); }
+    }).catch(err=>{alert("❌ خطأ في الاتصال بالسيرفر"); console.log(err);});
 }
 
 // فحص حالة الخدمة كل 3 ثوانٍ
 function checkStatus(){
-    fetch("https://telegram-hotspot.onrender.com/status")
-    .then(r=>r.json())
-    .then(data=>{
-        if(data.status==="closed"){document.getElementById("blocker").style.display="flex";}
-        else{document.getElementById("blocker").style.display="none";}
+    fetch("https://telegram-hotspot.onrender.com/status").then(r=>r.json()).then(data=>{
+        if(data.status==="closed"){ document.getElementById("blocker").style.display="flex"; }
+        else{ document.getElementById("blocker").style.display="none"; }
     });
 }
-checkStatus();
-setInterval(checkStatus,3000);
+checkStatus(); setInterval(checkStatus,3000);
 </script>
 
 </body>
