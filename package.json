@@ -1,7 +1,7 @@
 {
   "name": "telegram-hotspot",
   "version": "1.0.0",
-  "description": "Send Hotspot subscription data to Telegram",
+  "description": "Hotspot subscription control + Telegram bot",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
