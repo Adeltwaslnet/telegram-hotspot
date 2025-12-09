@@ -51,4 +51,46 @@ app.get("/pay", (req, res) => {
     if (serviceOpen) {
         res.sendFile(path.join(__dirname, "pay.html"));
     } else {
-        res.sendFile(path.join(__dirname, "clo
+        res.sendFile(path.join(__dirname, "close.html")); // اسم الملف المعدل
+    }
+});
+
+// =============================
+// استقبال طلب الدفع وإرساله للبوت
+// =============================
+app.post("/pay", async (req, res) => {
+    const { name, phone, ref, offer } = req.body;
+
+    const text = `💳 طلب اشتراك جديد
+🎁 العرض: ${offer}
+👤 رقم العرض: ${name}
+📞 رقم الواتس: ${phone}
+🔢 رقم المرجع: ${ref}`;
+
+    try {
+        await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: CHAT, text })
+        });
+
+        res.json({ ok: true });
+
+    } catch (error) {
+        console.error("Error sending message:", error);
+        res.status(500).json({ ok: false, error: error.message });
+    }
+});
+
+// =============================
+// endpoint لإرجاع حالة الخدمة (لـ pay.html)
+// =============================
+app.get("/status", (req, res) => {
+    res.json({ status: serviceOpen ? "open" : "closed" });
+});
+
+// =============================
+// تشغيل السيرفر
+// =============================
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
