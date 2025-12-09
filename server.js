@@ -3,28 +3,26 @@ const fetch = require("node-fetch");
 const cors = require("cors");
 
 const app = express();
-
-// ✅ تفعيل CORS
 app.use(cors());
-
-// ✅ تمكين قراءة JSON من body
 app.use(express.json());
+app.use(express.static("twasl")); // مجلد الصفحات
 
-// ✅ تمكين ملفات static من مجلد twasl
-app.use(express.static("twasl"));
+// حالة الموقع (مفتوح / مغلق)
+let status = "open";
 
-// توكن البوت و chat ID
-const TOKEN = "7940357644:AAFH10KCI6_NvXMyXle9-993l5cHo4HVhNk";
-const CHAT  = "6019392123";
+// بوت التلغرام
+const TOKEN = "YOUR_TOKEN";
+const CHAT  = "YOUR_CHAT_ID";
 
-// مسار استقبال البيانات من صفحة الدفع
+// مسار إرسال بيانات الطلب
 app.post("/pay", async (req, res) => {
-    const { name, phone, ref } = req.body;
+    const { name, phone, ref, offer } = req.body;
 
     const text = `💳 طلب اشتراك جديد
-👤 رقم العرض:${name}
+👤 رقم العرض: ${name}
 📞 رقم الواتس: ${phone}
-🔢 رقم المرجع / الحوالة: ${ref}`;
+🔢 رقم المرجع: ${ref}
+🎁 العرض المختار: ${offer}`;
 
     try {
         await fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
@@ -39,6 +37,23 @@ app.post("/pay", async (req, res) => {
         console.error("Error sending message:", error);
         res.status(500).json({ ok: false, error: error.message });
     }
+});
+
+// 🔥 مسار حالة الموقع
+app.get("/status", (req, res) => {
+    res.json({ status });
+});
+
+// 🔥 مسار تغيير الحالة
+app.post("/set", (req, res) => {
+    const { state } = req.body;
+
+    if (state === "open" || state === "closed") {
+        status = state;
+        return res.json({ ok: true, status });
+    }
+    
+    res.json({ ok: false, error: "invalid state" });
 });
 
 // تشغيل السيرفر
